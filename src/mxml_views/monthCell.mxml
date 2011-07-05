@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- MONTH CELL IS USED IN MONTH VIEW TO SHOW SQUARE BOXES
+	DESCRIPTION TEXT IS USED TO SHOW EVENT'S DESCRIPTION 
+-->
+<mx:Canvas 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="115" 
+	height="112" 
+	styleName="canDayCellBase">
+	<mx:ApplicationControlBar id="canHeader" x="0" y="-3" height="22" width="100%" styleName="appBarDayCell">
+		<mx:Label width="90" height="16" id="lblDate" color="#FFFFFF" fontWeight="bold" styleName="lblHours"/>
+	</mx:ApplicationControlBar>
+	<mx:TextArea x="3" y="28" width="95%" height="70%" editable="false" selectable="false" id="txtDesc" styleName="txtArea"/>
+</mx:Canvas>
