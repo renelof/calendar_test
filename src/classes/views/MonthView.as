@@ -11,7 +11,9 @@ package classes.views
 	import mx.containers.Grid;
 	import mx.containers.GridItem;
 	import mx.containers.GridRow;
+	import mx.controls.Alert;
 	import mx.controls.Label;
+	import mx.controls.TextArea;
 	import mx.utils.ObjectUtil;
 	
 	import mxml_views.monthCell;
@@ -143,21 +145,22 @@ package classes.views
 				}
 				
 				var objGridItem:GridItem = new GridItem();
-				var objDayCell:monthCell = new monthCell();
-								
+				var objDayCell:Label = new Label();
+				objDayCell.width = 115;
+				objDayCell.height = 112;
 				objGridItem.addChild(objDayCell);
 				objGridRow.addChild(objGridItem);
 				
 				
-				objDayCell.txtDesc.visible = false;
+				//objDayCell.visible = false;
 						
 				if(arrDays[i] == -1)
 				{
-					objDayCell.canHeader.visible = false;
+					objDayCell.visible = false;
 				}
 				else
 				{
-					objDayCell.lblDate.text = arrDays[i].data;
+					objDayCell.text = arrDays[i].data;
 					objDayCell.addEventListener(MouseEvent.CLICK, onDayCellClick);
 					objDayCell.data = {date: new Date(currentYear, currentMonth, arrDays[i].data) };
 					
@@ -168,8 +171,8 @@ package classes.views
 						var obj:Object = DataHolder.getInstance().dataProvider[j];
 						if(ObjectUtil.dateCompare(obj.date, objDayCell.data.date) == 0)
 						{
-							objDayCell.txtDesc.text = obj.desc;
-							objDayCell.txtDesc.visible = true;
+							objDayCell.text = obj.desc;
+							objDayCell.visible = true;
 							break;
 						}
 					}
@@ -189,7 +192,7 @@ package classes.views
 		// will change the view to Day View and set current date as per cell clicked in the Grid
 		private function onDayCellClick(_event:MouseEvent):void
 		{
-			var objDayCell:monthCell
+			/*var objDayCell:monthCell
 			if(_event.target.toString().indexOf("txtDesc") == -1)
 			{
 				objDayCell = monthCell(_event.target);
@@ -198,7 +201,8 @@ package classes.views
 			{
 				objDayCell = monthCell(_event.target.parent.parent);
 			}
-			dispatchEvent(new CustomEvents(CustomEvents.MONTH_VIEW_CLICK, objDayCell.data));
+			dispatchEvent(new CustomEvents(CustomEvents.MONTH_VIEW_CLICK, objDayCell.data));*/
+			Alert.show("Click");
 		}
 		
 		/**

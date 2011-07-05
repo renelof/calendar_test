@@ -3,7 +3,7 @@
 			   xmlns:s="library://ns.adobe.com/flex/spark"
 			   xmlns:mx="library://ns.adobe.com/flex/mx"
 			   xmlns:ns1="*"
-			   minWidth="955" minHeight="600">
+			   minWidth="1000" minHeight="900">
 	
 	
 	<fx:Declarations>

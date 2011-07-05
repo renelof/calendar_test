@@ -6,9 +6,12 @@
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	width="115" 
 	height="112" 
-	styleName="canDayCellBase">
-	<mx:ApplicationControlBar id="canHeader" x="0" y="-3" height="22" width="100%" styleName="appBarDayCell">
+	styleName="canDayCellBase"
+	backgroundColor="#7FC4FF">
+	<mx:ApplicationControlBar id="canHeader" x="0" y="-3" width="100%" height="22"
+							  contentBackgroundColor="#7FC4FF" styleName="appBarDayCell">
 		<mx:Label width="90" height="16" id="lblDate" color="#FFFFFF" fontWeight="bold" styleName="lblHours"/>
 	</mx:ApplicationControlBar>
-	<mx:TextArea x="3" y="28" width="95%" height="70%" editable="false" selectable="false" id="txtDesc" styleName="txtArea"/>
+	<mx:TextArea id="txtDesc" x="3" y="28" width="95%" height="70%" borderColor="#7FC4FF"
+				 editable="false" selectable="false" styleName="txtArea"/>
 </mx:Canvas>

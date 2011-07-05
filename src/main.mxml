@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
 		 xmlns:s="library://ns.adobe.com/flex/spark" 
-		 xmlns:mx="library://ns.adobe.com/flex/mx" width="800" height="700"
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="1000" height="900"
 		 creationComplete="onApplicationStart()" 
 		 xmlns:comViews="mxml_views.*" 
 		 xmlns:views="classes.views.*">
@@ -70,28 +70,14 @@
 				CommonUtils.description = "";
 				CommonUtils.currentDate = null;
 				
-				eventForm.visible = false;
-				eventForm.txtDescription.text = "";
-				
 				onDateChange();
 				monthView.redraw();
 			}
 		]]>
 	</fx:Script>
-	<mx:Button x="9" y="10" label="Day" click="onDayClick()"/>
-	<mx:Button x="62" y="10" label="Week" click="onWeekClick()"/>
-	<mx:Button x="52" y="251" label="Add Event" click="{eventForm.visible=true;}" enabled="{eventForm.currentDate != null}" />
-	<mx:Button x="124" y="10" label="Month" click="onMonthClick()"/>
 	<mx:DateChooser x="7" y="39" id="dtPicker" scroll="onDateScroll()" change="onDateChange()"  showToday="true" yearNavigationEnabled="true"/>
 	<fx:Style source="styles/skin.css"/>
-	<mx:ViewStack x="200" y="0" id="stackViews" width="100%" height="100%">
-		<views:DayView id="dayView" label="Day View" width="100%" height="100%" horizontalScrollPolicy="off" currentDate="{m_intCurrentDate}" showEffect="WipeDown" hideEffect="WipeUp" />
-		<views:WeekView id="weekView" label="Week View" x="0" y="0" currentDate="{m_intCurrentDate}" horizontalScrollPolicy="off" showEffect="WipeDown" hideEffect="WipeUp" />
+	<mx:ViewStack x="200" y="0" id="stackViews" width="100%" height="100%">		
 		<views:MonthView id="monthView" label="Month View" x="0" y="0" horizontalScrollPolicy="off" currentMonth="{dtPicker.displayedMonth}" currentYear="{dtPicker.displayedYear}" showEffect="WipeDown" hideEffect="WipeUp" />
-	</mx:ViewStack>
-	<mx:TextArea x="10" y="336" height="104" fontWeight="normal" textAlign="center" borderStyle="none"  selectable="false" editable="false" color="#0367FC" fontSize="12" fontFamily="Arial">
-		<mx:htmlText><![CDATA[Click on a button in <b>Day or Week</b> view and then click <b>Add Event</b> button to add an event on particular date and time.]]></mx:htmlText>
-	</mx:TextArea>
-	<comViews:EventForm x="0" y="294" id="eventForm" hour="{CommonUtils.hour}" meridiem="{CommonUtils.meridiem}" mins="{CommonUtils.mins}" currentDate="{CommonUtils.currentDate}" description="{CommonUtils.description}" visible="false">
-	</comViews:EventForm>
+	</mx:ViewStack>	
 </s:Group>

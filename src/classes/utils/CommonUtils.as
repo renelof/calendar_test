@@ -8,8 +8,7 @@ package classes.utils
 	import mx.controls.Button;
 	import mx.utils.ObjectUtil;
 	
-	import mxml_views.hourCell;
-	import mxml_views.hourCellLeftStrip;
+
 	
 	/**
 	 * COMMON UTILS CLASS CONATINS ALL COMMON FUNCTIONS/VARIABLES
@@ -115,136 +114,11 @@ package classes.utils
 			}
 		}
 		
-		/**
-		 * creates blue color strip which shows hours in week and day view
-		*/		
-		public static function createLeftHourStrip(_parent:Canvas):void
-		{
-			for(var i:int=0; i<24; i++)
-			{
-				var strLabel:String = "";
-				var objLeftStrip:hourCellLeftStrip = new hourCellLeftStrip();
-				objLeftStrip.y = objLeftStrip.height * i;
-				_parent.addChild(objLeftStrip);
-				
-				
-				if(i == 0)
-				{
-					objLeftStrip.lblMins.text = "am";
-				}		
-				else if(i == 12)
-				{
-					objLeftStrip.lblMins.text = "pm";
-				}
-				else
-				{
-					objLeftStrip.lblMins.text = "00";
-				}
-				
-				if(i == 0)
-				{
-					strLabel = "12";
-				}
-				else if(i>12)
-				{
-					strLabel = String(i-12);
-				}
-				else
-				{
-					strLabel = String(i);
-				}
-				
-				strLabel = (strLabel.length < 2) ? ("0" + strLabel) : strLabel;
-				
-				objLeftStrip.lblHours.text = strLabel;
-				
-			}
-		}
 		
-		/**
-		 * creates right strip which shows buttons in week and day view. which allow user to set
-		 * some new events on a particular time.
-		*/
-		public static function createRightHourStrip(_parent:Canvas, _savedDate:Date = null):void
-		{
-			
-			for(var i:int=0; i<24; i++)
-			{
-				var strLabel:String;
-				var objHourCell:hourCell = new hourCell();
-				objHourCell.y = objHourCell.height * i;
-				_parent.addChild(objHourCell);
-				
-				
-				if(i == 0)
-				{
-					strLabel = "12";
-				}
-				else if(i>12)
-				{
-					strLabel = String(i-12);
-				}
-				else
-				{
-					strLabel = String(i);
-				}
-						
-				
-				strLabel = (strLabel.length < 2) ? ("0" + strLabel) : strLabel;
-				var dt:* = _savedDate != null ? new Date(_savedDate.getFullYear(), _savedDate.month, _savedDate.date) : null;
-				objHourCell.data = {date: dt, time: strLabel, meridiem: (i < 12? "am" : "pm")};
-				
-				// check if event already saved for current time then show its description
-				for(var j:int=0; j<DataHolder.getInstance().dataProvider.length; j++)
-				{
-					var obj:Object = DataHolder.getInstance().dataProvider[j];
-					if(ObjectUtil.dateCompare(obj.date, _savedDate) == 0)
-					{
-						if(obj.hour == strLabel && obj.meridiem == objHourCell.data.meridiem)
-						{
-							if(obj.mins == 0)
-							{
-								objHourCell.btnFirstHalf.label = obj.desc;
-							}
-							else
-							{
-								objHourCell.btnSecondHalf.label = obj.desc;
-							}
-						}
-					}
-				}
-				
-				// click event for buttons of first and second half
-				objHourCell.btnFirstHalf.addEventListener(MouseEvent.CLICK, onDayViewClick);
-				objHourCell.btnSecondHalf.addEventListener(MouseEvent.CLICK, onDayViewClick);
-			}
-		}
 		
-		/**
-		 * Click event of buttons of First and Second half of a hour
-		 * set various values like hour, meridiem, date 
-		 * these values are used by Event Form 
-		*/
-		private static function onDayViewClick(event:MouseEvent):void
-		{
-			var btn:Button = Button(event.target);
-			var objHourCell:hourCell = hourCell(btn.parent);
-			if(event.target.toString().indexOf("btnFirstHalf") != -1)
-			{
-				hour = objHourCell.data.time == "12" ? 0 : int(objHourCell.data.time);
-				meridiem = objHourCell.data.meridiem == "am"? 0 : 1;
-				mins = 0;
-			}
-			else if(event.target.toString().indexOf("btnSecondHalf") != -1)
-			{
-				hour = objHourCell.data.time == "12" ? .5 : int(objHourCell.data.time) + .5;
-				meridiem = objHourCell.data.meridiem == "am"? 0 : 1;
-				mins = 1;
-			}
-			currentDate = objHourCell.data.date;
-			description = btn.label;
-			
-		}
+		
+		
+		
 
 	}
 }
