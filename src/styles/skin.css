@@ -80,6 +80,8 @@ Label.lblHours
 	fontSize: 12;
 }
 
+
+
 /* mins label used in day and week view */
 Label.lblMins
 {
@@ -98,3 +100,7 @@ Label.lblMins
 }
 
 */
+
+GridColumn.headerStyled{
+	width:90px;
+}

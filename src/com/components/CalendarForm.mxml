@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" width="620" height="600"
+		 creationComplete="createDaysGrid()">
+	<s:layout>
+		<s:BasicLayout/>
+	</s:layout>
+	
+	<fx:Script>
+		<![CDATA[
+			import classes.model.Week;
+			import classes.model.WeekDay;
+			import classes.utils.CommonUtils;
+			
+			import mx.collections.ArrayCollection;
+			[Bindable]
+			private var weekArray:ArrayCollection;
+			// create grid of days in current month as per current date provided
+			private function createDaysGrid():void
+			{
+				weekArray = new ArrayCollection();
+				var currentYear:int  = dtPicker.displayedYear;
+				var currentMonth:int = dtPicker.displayedMonth;
+				// always assume that first day of a month will have date as 1
+				// currentMonth and currentYear are supplied by main.mxml file		
+				var objDate:Date = new Date(currentYear, currentMonth, 1);
+				
+				// get total days count for currentMonth in currentYear
+				var intTotalDaysInMonth:int = CommonUtils.getDaysCount(currentMonth, currentYear);
+				var i:int;
+				// add empty items in case first day is not Sunday
+				// i.e. MonthView always shows 7 coloumns starting from Sunday and ending to Saturday
+				// so if it suppose Wednesday is the date 1 of this month that means we need to
+				// add 3 empty cells at start
+				var arrDays:Array = new Array();
+				var firstWeek:Week = new Week();
+				var weekDay:WeekDay;
+				for(i=0; i<objDate.getDay(); i++)
+				{	
+					weekDay = new WeekDay();
+					if ( i == 0 ){
+						weekDay.dayNumber = -1;
+						firstWeek.sunday = weekDay;
+					}else if ( i == 1 ){
+						weekDay.dayNumber = -1;
+						firstWeek.monday = weekDay;
+					}else if ( i == 2 ){
+						weekDay.dayNumber = -1;
+						firstWeek.tuesday = weekDay;
+					}else if ( i == 3 ){
+						weekDay.dayNumber = -1;
+						firstWeek.wednesday = weekDay;
+					}else if ( i == 4 ){
+						weekDay.dayNumber = -1;
+						firstWeek.thursday = weekDay;
+					}else if ( i == 5 ){
+						weekDay.dayNumber = -1;
+						firstWeek.friday = weekDay;
+					}else if ( i == 6 ){
+						weekDay.dayNumber = -1;
+						firstWeek.saturday = weekDay;
+					}
+					
+				}
+				weekArray.addItem(firstWeek);
+				var currentWeek:Week;
+				// now loop through total number of days in this month and save values in array
+				for(i=0; i<intTotalDaysInMonth; i++)
+				{
+					if(i % 7 == 0){
+						currentWeek = new Week();
+					}
+					var dayNumber:int = i+1;
+					var objDate1:Date = new Date(currentYear, currentMonth,i);
+					var strDayName:String = CommonUtils.getDayName(objDate1.getDay());
+					var dayWeekNumber = objDate1.getDay();
+					weekDay = new WeekDay();
+					if ( dayWeekNumber == 0 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.sunday = weekDay;
+						
+					}else if ( dayWeekNumber == 1 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.monday = weekDay;
+					}else if ( dayWeekNumber == 2 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.tuesday = weekDay;
+					}else if ( dayWeekNumber == 3 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.wednesday = weekDay;
+					}else if ( dayWeekNumber == 4 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.thursday = weekDay;
+					}else if (dayWeekNumber == 5 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.friday = weekDay;
+					}else if ( dayWeekNumber == 6 ){
+						weekDay.dayNumber = dayNumber;
+						weekDay.dayName = strDayName;
+						currentWeek.saturday = weekDay;
+					}
+					if( i > 0 && i % 7 == 0){
+						weekArray.addItem(currentWeek);
+					}
+				}
+			}		
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:DataGrid id="grdCalendar" x="6" y="43" width="602" height="529"
+				requestedRowCount="4"
+				rowHeight="85" selectionMode="singleCell"  dataProvider="{weekArray}">
+		<s:columns>
+			<s:ArrayList>
+				<s:GridColumn width="85" dataField="sunday" headerText="Sunday" resizable="false"
+							  sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="monday" headerText="Monday" resizable="false"
+							  sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="tuesday" headerText="Tuesday"
+							  resizable="false" sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="wednesday" headerText="Wednesday"
+							  resizable="false" sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="thursday" headerText="Thursday"
+							  resizable="false" sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="friday" headerText="Friday" resizable="false"
+							  sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+				<s:GridColumn width="85" dataField="saturday" headerText="Saturday"
+							  resizable="false" sortable="false" itemEditor="com.components.WeekDayRender">
+				</s:GridColumn>
+			</s:ArrayList>
+		</s:columns>		
+	</s:DataGrid>
+	<mx:DateChooser id="dtPicker" x="415" y="10" height="31" enabled="true" showToday="false"
+					yearNavigationEnabled="true" change="createDaysGrid()"/>
+</s:Group>

@@ -80,6 +80,8 @@ Label.lblHours
 	fontSize: 12;
 }
 
+
+
 /* mins label used in day and week view */
 Label.lblMins
 {
@@ -88,7 +90,7 @@ Label.lblMins
 	fontSize: 10;
 }
 
-/* Embed Verdana font in application */
+/* Embed Verdana font in application 
 @font-face
 {
 	fontFamily: Arial;
@@ -97,3 +99,8 @@ Label.lblMins
 	src: local("Arial");
 }
 
+*/
+
+GridColumn.headerStyled{
+	width:90px;
+}

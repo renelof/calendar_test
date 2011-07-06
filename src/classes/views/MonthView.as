@@ -107,7 +107,7 @@ package classes.views
 			// now loop through total number of days in this month and save values in array
 			for(i=0; i<intTotalDaysInMonth; i++)
 			{
-				var objDate1:Date = new Date(currentYear, currentMonth, (i+1));
+				var objDate1:Date = new Date(currentYear, currentMonth, i);
 				var strStartDayName:String = CommonUtils.getDayName(objDate1.getDay());
 				arrDays.push({data:i+1, label:strStartDayName});
 			}
