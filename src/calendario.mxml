@@ -9,8 +9,9 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-	<components:CalendarForm x="14" y="24">
-	</components:CalendarForm>
+	<local:main x="10" y="10">
+	</local:main>
+	
 	
 	
 	
