@@ -75,11 +75,11 @@
 			}
 		]]>
 	</fx:Script>
-	<mx:DateChooser x="7" y="39" id="dtPicker" scroll="onDateScroll()" 
+	<mx:DateChooser x="7" y="39"  height="31" id="dtPicker" scroll="onDateScroll()" 
 					change="onDateChange()"  showToday="true" yearNavigationEnabled="true"
 					/>
 	<fx:Style source="styles/skin.css"/>
 	<mx:ViewStack x="200" y="0" id="stackViews" width="100%" height="100%">		
-		<views:MonthView id="monthView" label="Month View" x="0" y="0" horizontalScrollPolicy="off" currentMonth="{dtPicker.displayedMonth}" currentYear="{dtPicker.displayedYear}" showEffect="WipeDown" hideEffect="WipeUp" />
+		<views:MonthView id="monthView"  label="Month View" x="0" y="0" horizontalScrollPolicy="off" currentMonth="{dtPicker.displayedMonth}" currentYear="{dtPicker.displayedYear}" showEffect="WipeDown" hideEffect="WipeUp" />
 	</mx:ViewStack>	
 </s:Group>
